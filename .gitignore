@@ -1,0 +1,9 @@
+# NetBeans specific #
+build/
+dist/
+private/
+
+genfiles.properties
+build-impl.xml
+
+
