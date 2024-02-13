@@ -46,10 +46,9 @@ public class DBAdapter {
     private Statement st;
     private InputStream input = null;
 
-    // Alterei o construtor para a password ficar num ficheiro que será ignorado pelo git
     public DBAdapter() throws SQLException {
     try {
-        //this.input = new FileInputStream("./src/resources/config.properties");
+        
         InputStream input = new FileInputStream("nbproject/private/db.properties");
         Properties prop = new Properties();
 
@@ -61,9 +60,9 @@ public class DBAdapter {
         prop.load(input);
 
         // Print out all properties for debugging purposes
-        for (String key : prop.stringPropertyNames()) {
-            System.out.println(key + "=" + prop.getProperty(key));
-        }
+        //for (String key : prop.stringPropertyNames()) {
+        //    System.out.println(key + "=" + prop.getProperty(key));
+        //}
 
         server = prop.getProperty("dbserver");
         username = prop.getProperty("dbusername");
