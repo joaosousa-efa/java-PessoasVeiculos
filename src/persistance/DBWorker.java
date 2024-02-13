@@ -12,8 +12,8 @@ import java.util.ArrayList;
  *
  * @author João Sousa
  * 
- * Os métodos para guardar ou apagar ou listar pessoas ou veiculos tem de ser o mais genérico possível
- * Isso irá permititir maior flexibilidade na eventualidade de mudar de base de dados pra outro tipo (exemplo mudar de MySQL para SQLServer)
+ * Os métodos para guardar, apagar ou listar pessoas ou veiculos tem de ser o mais genérico possível
+ * Isso irá permitir maior flexibilidade na eventualidade de mudar de base de dados para outro tipo (exemplo mudar de MySQL para SQLServer)
  */
 public class DBWorker {
 

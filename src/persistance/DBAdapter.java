@@ -22,52 +22,61 @@ import java.util.Properties;
  * @author João Sousa
  */
 public class DBAdapter {
-   
+    
+// Todo: mover username e password para um ficheiro que será ignorado pelo git
+    
+//    private final String server = "localhost";
+//    private final String username = "forasteiro";
+//    private final String password = "123";
+//    private final String dbname = "PessoasVeiculos";
+//    private final String url = "jdbc:mysql://" + server + ":3306/" + dbname;
+    
+//    public DBAdapter() throws SQLException {
+//        conn = DriverManager.getConnection(url, username, password);
+//    }
+    
     private String server = "";
     private String username = "";
     private String password = "";
     private String dbname = "";
     private String url = "";
     
+    
     private Connection conn = null;
     private Statement st;
+    private InputStream input = null;
 
+    // Alterei o construtor para a password ficar num ficheiro que será ignorado pelo git
     public DBAdapter() throws SQLException {
-        
-        try (InputStream input = DBAdapter.class.getClassLoader().getResourceAsStream("db.properties")) {
+    try {
+        //this.input = new FileInputStream("./src/resources/config.properties");
+        InputStream input = new FileInputStream("nbproject/private/db.properties");
+        Properties prop = new Properties();
 
-            Properties prop = new Properties();
-
-            if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
-                return;
-            }
-
-            //load a properties file from class path, inside static method
-            prop.load(input);
-
-            // Usa as propriedades
-            server = prop.getProperty("db.server");
-            username = prop.getProperty("db.username");
-            password = prop.getProperty("db.password");
-            dbname = prop.getProperty("db.name");
-            url = "jdbc:mysql://" + server + ":3306/" + dbname;
-
-            // ... conecte ao banco de dados usando as credenciais acima
-            conn = DriverManager.getConnection(url, username, password);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (input == null) {
+            System.err.println("Sorry, unable to find .properties file");
+            return;
         }
-    }
-     
-    //    private final String server = "localhost";
-    //    private final String username = "forasteiro";
-    //    private final String password = "123";
-    //    private final String dbname = "PessoasVeiculos";
-    //    private final String url = "jdbc:mysql://" + server + ":3306/" + dbname;
-        
 
+        prop.load(input);
+
+        // Print out all properties for debugging purposes
+        for (String key : prop.stringPropertyNames()) {
+            System.out.println(key + "=" + prop.getProperty(key));
+        }
+
+        server = prop.getProperty("dbserver");
+        username = prop.getProperty("dbusername");
+        password = prop.getProperty("dbpassword");
+        dbname = prop.getProperty("dbname");
+        url = "jdbc:mysql://" + server + ":3306/" + dbname;
+
+        conn = DriverManager.getConnection(url, username, password);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
+        
     public ArrayList<Pessoa> listaPessoas() throws SQLException, NomeInvalidoException, NumeroCCException, IdadeException {
 
         ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();

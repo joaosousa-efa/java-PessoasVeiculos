@@ -17,7 +17,6 @@ public class Veiculo {
     private int nPortas;
     private String proprietario;
 
-
     public Veiculo() {
     }
 
@@ -29,6 +28,7 @@ public class Veiculo {
         this.cilindrada = cilindrada;
         this.nPortas = nPortas;
         this.proprietario = proprietario;
+        
     }
 
     public String getMarca() {
@@ -138,5 +138,4 @@ public class Veiculo {
         return Objects.equals(this.nPortas, other.nPortas);
     }
 
-    
 }
